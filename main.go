@@ -10,9 +10,8 @@ import (
 )
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error load env files", err.Error())
+	if err := godotenv.Load(); err != nil {
+		log.Println("Error fetch ENV")
 	}
 }
 
@@ -24,5 +23,5 @@ func main() {
 
 func Hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Exec route hello")
-	fmt.Fprintf(w, os.Getenv("HELLO"))
+	fmt.Fprint(w, os.Getenv("HELLO"))
 }
