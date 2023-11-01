@@ -18,7 +18,11 @@ func init() {
 func main() {
 	fmt.Println("Run serveur")
 	http.HandleFunc("/", Hello)
-	http.ListenAndServe(":8080", nil)
+	var port string = os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	http.ListenAndServe("0.0.0.0:"+port, nil)
 }
 
 func Hello(w http.ResponseWriter, r *http.Request) {
